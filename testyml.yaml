@@ -1,0 +1,15 @@
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: yes
+  tasks:
+     - name: Create CRI-O config file
+       file:
+         path: "/etc/modules-load.d/crio.conf"
+         state: "touch"
+     - name: add modules in conf file
+       blockinfile:
+         path: "/etc/modules-load.d/crio.conf"
+         block: |
+            overlay
+            br_netfilter
