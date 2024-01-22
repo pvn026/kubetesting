@@ -35,4 +35,14 @@
        shell: |
                sudo swapoff -a
                sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
-          
+     - name: enable cri-repo
+       environment:
+          OS: CentOS_8
+          VERSION: 1.28
+       shell: |
+		           curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_8/devel:kubic:libcontainers:stable.repo
+		           curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/CentOS_8/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
+ 
+     - name: Install cri-o and cri-o tools
+       shell: |
+               sudo dnf install cri-o -y
