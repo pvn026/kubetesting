@@ -45,3 +45,7 @@
      - name: Installing Crio
        shell: |
                sudo dnf install cri-o -y
+     - name: Install the latest version of cri tools
+       ansible.builtin.dnf:
+         name: cri-tools
+         state: latest
