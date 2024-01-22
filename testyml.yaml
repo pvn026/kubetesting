@@ -49,3 +49,7 @@
        ansible.builtin.dnf:
          name: cri-tools
          state: latest
+     - name: Create kubernetes repo file
+       file:
+         path: "/etc/yum.repos.d/kubernetes_lastest.repo"
+         state: "touch"
