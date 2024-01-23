@@ -14,6 +14,13 @@
             overlay
             br_netfilter
             #This is test
+     - name: adding host entries in host file
+       blockinfile:
+         path: "/etc/hosts"
+         block: |
+            192.168.1.50  masterlab.com
+            192.168.1.51  workernode1.com
+            192.168.1.52  workernode2.com       
      - name: Enable sysctl params
        file:
          path: "/etc/sysctl.d/99-kubernetes-cri.conf"
@@ -45,6 +52,8 @@
      - name: Installing Crio
        shell: |
                sudo dnf install cri-o -y
+               sudo systemctl enable crio
+               sudo systemctl start crio
      - name: Install the latest version of cri tools
        ansible.builtin.dnf:
          name: cri-tools
