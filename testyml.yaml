@@ -38,10 +38,6 @@
                sudo modprobe br_netfilter
      - name: Reload parameters
        command: sudo sysctl --system
-     - name: disable swap
-       shell: |
-               sudo swapoff -a
-               sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
      - name: enable cri-repo
        environment:
           OS: CentOS_8
@@ -56,6 +52,10 @@
        ansible.builtin.dnf:
          name: cri-tools
          state: latest
+     - name: disable swap
+       shell: |
+               sudo swapoff -a
+               sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
      - name: Create kubernetes repo file
        file:
          path: "/etc/yum.repos.d/kubernetes_lastest.repo"
