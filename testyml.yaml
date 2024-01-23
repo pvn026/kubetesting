@@ -52,8 +52,6 @@
      - name: Installing Crio
        shell: |
                sudo dnf install cri-o -y
-               sudo systemctl enable crio
-               sudo systemctl start crio
      - name: Install the latest version of cri tools
        ansible.builtin.dnf:
          name: cri-tools
