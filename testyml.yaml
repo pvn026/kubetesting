@@ -77,6 +77,3 @@
        shell: |
                sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
                sudo systemctl enable --now kubelet
-     - name: joining Kubernetes node
-       shell: |
-               kubeadm join 192.168.1.50:6443 --token twdh5s.r2nrmvnwepm284d6 --discovery-token-ca-cert-hash sha256:989d906c5210aa27d54417013de00a5a0434b7c5b732f57ba7befdf204db8354
